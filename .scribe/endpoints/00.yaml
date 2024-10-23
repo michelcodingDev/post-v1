@@ -1,0 +1,652 @@
+name: Posts
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/posts
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Listar todos os posts
+
+        Este endpoint retorna uma lista de todos os posts não deletados.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "title": "Meu primeiro post",
+            "content": "Este é o conteúdo do post.",
+            "author_id": 1,
+            "created_at": "2023-08-30T19:20:02.000000Z",
+            "updated_at": "2023-08-30T19:20:02.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "error": "Nenhuma post foi encontrada."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/posts/create
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Criar um novo post
+
+        Este endpoint permite criar um novo post.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'O título do post. Exemplo: Meu novo post'
+        required: true
+        example: praesentium
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      content:
+        name: content
+        description: 'O conteúdo do post.'
+        required: true
+        example: sint
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      author_id:
+        name: author_id
+        description: 'O ID do autor. Exemplo: 1'
+        required: true
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      image:
+        name: image
+        description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
+        required: false
+        example: fugit
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      title: praesentium
+      content: sint
+      author_id: 17
+      image: fugit
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "message": "Post criado com sucesso.",
+            "data": {
+              "id": 1,
+              "title": "Meu novo post",
+              "content": "Este é o conteúdo do post.",
+              "author_id": 1,
+              "created_at": "2023-08-30T19:20:02.000000Z",
+              "updated_at": "2023-08-30T19:20:02.000000Z"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "error": "Erro de validação",
+            "messages": {
+              "title": ["O campo título é obrigatório."],
+              "content": ["O campo conteúdo é obrigatório."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 500
+        content: |-
+          {
+            "error": "Erro no banco de dados."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/posts/{id}'
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Exibir um post
+
+        Este endpoint retorna os detalhes de um post específico.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'O ID do post. Exemplo: 1'
+        required: true
+        example: 11
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 11
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "title": "Meu primeiro post",
+            "content": "Este é o conteúdo do post.",
+            "author_id": 1,
+            "created_at": "2023-08-30T19:20:02.000000Z",
+            "updated_at": "2023-08-30T19:20:02.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "error": "Post não encontrado."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 500
+        content: |-
+          {
+            "error": "Erro no banco de dados."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/posts/{id}'
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Atualizar um post
+
+        Este endpoint permite atualizar um post existente.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'O ID do post. Exemplo: 1'
+        required: true
+        example: 14
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 14
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'O novo título do post. Exemplo: Título atualizado'
+        required: false
+        example: debitis
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      content:
+        name: content
+        description: 'O novo conteúdo do post.'
+        required: false
+        example: molestias
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      author_id:
+        name: author_id
+        description: 'O ID atualizado do autor.'
+        required: false
+        example: 17
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      image:
+        name: image
+        description: 'O novo link da imagem.'
+        required: false
+        example: sit
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      title: debitis
+      content: molestias
+      author_id: 17
+      image: sit
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Post atualizado com sucesso.",
+            "data": {
+              "id": 1,
+              "title": "Título atualizado",
+              "content": "Conteúdo atualizado",
+              "author_id": 1,
+              "created_at": "2023-08-30T19:20:02.000000Z",
+              "updated_at": "2023-08-30T19:40:02.000000Z"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "error": "Post não encontrado."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "error": "Erro de validação",
+            "messages": {
+              "title": ["O campo título é obrigatório."],
+              "content": ["O campo conteúdo é obrigatório."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 500
+        content: |-
+          {
+            "error": "Erro no banco de dados."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/posts/{id}'
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Excluir um post
+
+        Este endpoint marca um post como excluído.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'O ID do post. Exemplo: 1'
+        required: true
+        example: 9
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 9
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "message": "Post excluído com sucesso."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "error": "Post não encontrado."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 500
+        content: |-
+          {
+            "error": "Erro no banco de dados."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/post/create
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Criar um novo post
+
+        Este endpoint permite criar um novo post.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'O título do post. Exemplo: Meu novo post'
+        required: true
+        example: non
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      content:
+        name: content
+        description: 'O conteúdo do post.'
+        required: true
+        example: et
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      author_id:
+        name: author_id
+        description: 'O ID do autor. Exemplo: 1'
+        required: true
+        example: 7
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      image:
+        name: image
+        description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
+        required: false
+        example: odio
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      title: non
+      content: et
+      author_id: 7
+      image: odio
+    fileParameters: []
+    responses:
+      -
+        status: 201
+        content: |-
+          {
+            "message": "Post criado com sucesso.",
+            "data": {
+              "id": 1,
+              "title": "Meu novo post",
+              "content": "Este é o conteúdo do post.",
+              "author_id": 1,
+              "created_at": "2023-08-30T19:20:02.000000Z",
+              "updated_at": "2023-08-30T19:20:02.000000Z"
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 422
+        content: |-
+          {
+            "error": "Erro de validação",
+            "messages": {
+              "title": ["O campo título é obrigatório."],
+              "content": ["O campo conteúdo é obrigatório."]
+            }
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 500
+        content: |-
+          {
+            "error": "Erro no banco de dados."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/post/{$id}'
+    metadata:
+      groupName: Posts
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Exibir um post
+
+        Este endpoint retorna os detalhes de um post específico.
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      $id:
+        name: $id
+        description: ''
+        required: true
+        example: magni
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      id:
+        name: id
+        description: 'O ID do post. Exemplo: 1'
+        required: true
+        example: 19
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      $id: magni
+      id: 19
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: |-
+          {
+            "id": 1,
+            "title": "Meu primeiro post",
+            "content": "Este é o conteúdo do post.",
+            "author_id": 1,
+            "created_at": "2023-08-30T19:20:02.000000Z",
+            "updated_at": "2023-08-30T19:20:02.000000Z"
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 404
+        content: |-
+          {
+            "error": "Post não encontrado."
+          }
+        headers: []
+        description: ''
+        custom: []
+      -
+        status: 500
+        content: |-
+          {
+            "error": "Erro no banco de dados."
+          }
+        headers: []
+        description: ''
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

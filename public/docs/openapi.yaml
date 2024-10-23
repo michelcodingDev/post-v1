@@ -1,0 +1,633 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/posts:
+    get:
+      summary: "Listar todos os posts\n\nEste endpoint retorna uma lista de todos os posts não deletados."
+      operationId: listarTodosOsPostsEsteEndpointRetornaUmaListaDeTodosOsPostsNoDeletados
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Meu primeiro post'
+                  content: 'Este é o conteúdo do post.'
+                  author_id: 1
+                  created_at: '2023-08-30T19:20:02.000000Z'
+                  updated_at: '2023-08-30T19:20:02.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Meu primeiro post'
+                  content:
+                    type: string
+                    example: 'Este é o conteúdo do post.'
+                  author_id:
+                    type: integer
+                    example: 1
+                  created_at:
+                    type: string
+                    example: '2023-08-30T19:20:02.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-08-30T19:20:02.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Nenhuma post foi encontrada.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Nenhuma post foi encontrada.'
+      tags:
+        - Posts
+  /api/v1/posts/create:
+    get:
+      summary: "Criar um novo post\n\nEste endpoint permite criar um novo post."
+      operationId: criarUmNovoPostEsteEndpointPermiteCriarUmNovoPost
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Post criado com sucesso.'
+                  data:
+                    id: 1
+                    title: 'Meu novo post'
+                    content: 'Este é o conteúdo do post.'
+                    author_id: 1
+                    created_at: '2023-08-30T19:20:02.000000Z'
+                    updated_at: '2023-08-30T19:20:02.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Post criado com sucesso.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: 'Meu novo post'
+                      content:
+                        type: string
+                        example: 'Este é o conteúdo do post.'
+                      author_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2023-08-30T19:20:02.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-08-30T19:20:02.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro de validação'
+                  messages:
+                    title:
+                      - 'O campo título é obrigatório.'
+                    content:
+                      - 'O campo conteúdo é obrigatório.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro de validação'
+                  messages:
+                    type: object
+                    properties:
+                      title:
+                        type: array
+                        example:
+                          - 'O campo título é obrigatório.'
+                        items:
+                          type: string
+                      content:
+                        type: array
+                        example:
+                          - 'O campo conteúdo é obrigatório.'
+                        items:
+                          type: string
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro no banco de dados.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro no banco de dados.'
+      tags:
+        - Posts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'O título do post. Exemplo: Meu novo post'
+                  example: praesentium
+                content:
+                  type: string
+                  description: 'O conteúdo do post.'
+                  example: sint
+                author_id:
+                  type: integer
+                  description: 'O ID do autor. Exemplo: 1'
+                  example: 17
+                image:
+                  type: string
+                  description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
+                  example: fugit
+              required:
+                - title
+                - content
+                - author_id
+  '/api/v1/posts/{id}':
+    get:
+      summary: "Exibir um post\n\nEste endpoint retorna os detalhes de um post específico."
+      operationId: exibirUmPostEsteEndpointRetornaOsDetalhesDeUmPostEspecfico
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Meu primeiro post'
+                  content: 'Este é o conteúdo do post.'
+                  author_id: 1
+                  created_at: '2023-08-30T19:20:02.000000Z'
+                  updated_at: '2023-08-30T19:20:02.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Meu primeiro post'
+                  content:
+                    type: string
+                    example: 'Este é o conteúdo do post.'
+                  author_id:
+                    type: integer
+                    example: 1
+                  created_at:
+                    type: string
+                    example: '2023-08-30T19:20:02.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-08-30T19:20:02.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Post não encontrado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Post não encontrado.'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro no banco de dados.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro no banco de dados.'
+      tags:
+        - Posts
+    put:
+      summary: "Atualizar um post\n\nEste endpoint permite atualizar um post existente."
+      operationId: atualizarUmPostEsteEndpointPermiteAtualizarUmPostExistente
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Post atualizado com sucesso.'
+                  data:
+                    id: 1
+                    title: 'Título atualizado'
+                    content: 'Conteúdo atualizado'
+                    author_id: 1
+                    created_at: '2023-08-30T19:20:02.000000Z'
+                    updated_at: '2023-08-30T19:40:02.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Post atualizado com sucesso.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: 'Título atualizado'
+                      content:
+                        type: string
+                        example: 'Conteúdo atualizado'
+                      author_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2023-08-30T19:20:02.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-08-30T19:40:02.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Post não encontrado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Post não encontrado.'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro de validação'
+                  messages:
+                    title:
+                      - 'O campo título é obrigatório.'
+                    content:
+                      - 'O campo conteúdo é obrigatório.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro de validação'
+                  messages:
+                    type: object
+                    properties:
+                      title:
+                        type: array
+                        example:
+                          - 'O campo título é obrigatório.'
+                        items:
+                          type: string
+                      content:
+                        type: array
+                        example:
+                          - 'O campo conteúdo é obrigatório.'
+                        items:
+                          type: string
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro no banco de dados.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro no banco de dados.'
+      tags:
+        - Posts
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'O novo título do post. Exemplo: Título atualizado'
+                  example: debitis
+                content:
+                  type: string
+                  description: 'O novo conteúdo do post.'
+                  example: molestias
+                author_id:
+                  type: integer
+                  description: 'O ID atualizado do autor.'
+                  example: 17
+                image:
+                  type: string
+                  description: 'O novo link da imagem.'
+                  example: sit
+    delete:
+      summary: "Excluir um post\n\nEste endpoint marca um post como excluído."
+      operationId: excluirUmPostEsteEndpointMarcaUmPostComoExcludo
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Post excluído com sucesso.'
+                properties:
+                  message:
+                    type: string
+                    example: 'Post excluído com sucesso.'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Post não encontrado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Post não encontrado.'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro no banco de dados.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro no banco de dados.'
+      tags:
+        - Posts
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'O ID do post. Exemplo: 1'
+        example: 11
+        required: true
+        schema:
+          type: integer
+  /api/v1/post/create:
+    post:
+      summary: "Criar um novo post\n\nEste endpoint permite criar um novo post."
+      operationId: criarUmNovoPostEsteEndpointPermiteCriarUmNovoPost
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Post criado com sucesso.'
+                  data:
+                    id: 1
+                    title: 'Meu novo post'
+                    content: 'Este é o conteúdo do post.'
+                    author_id: 1
+                    created_at: '2023-08-30T19:20:02.000000Z'
+                    updated_at: '2023-08-30T19:20:02.000000Z'
+                properties:
+                  message:
+                    type: string
+                    example: 'Post criado com sucesso.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      title:
+                        type: string
+                        example: 'Meu novo post'
+                      content:
+                        type: string
+                        example: 'Este é o conteúdo do post.'
+                      author_id:
+                        type: integer
+                        example: 1
+                      created_at:
+                        type: string
+                        example: '2023-08-30T19:20:02.000000Z'
+                      updated_at:
+                        type: string
+                        example: '2023-08-30T19:20:02.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro de validação'
+                  messages:
+                    title:
+                      - 'O campo título é obrigatório.'
+                    content:
+                      - 'O campo conteúdo é obrigatório.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro de validação'
+                  messages:
+                    type: object
+                    properties:
+                      title:
+                        type: array
+                        example:
+                          - 'O campo título é obrigatório.'
+                        items:
+                          type: string
+                      content:
+                        type: array
+                        example:
+                          - 'O campo conteúdo é obrigatório.'
+                        items:
+                          type: string
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro no banco de dados.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro no banco de dados.'
+      tags:
+        - Posts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'O título do post. Exemplo: Meu novo post'
+                  example: non
+                content:
+                  type: string
+                  description: 'O conteúdo do post.'
+                  example: et
+                author_id:
+                  type: integer
+                  description: 'O ID do autor. Exemplo: 1'
+                  example: 7
+                image:
+                  type: string
+                  description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
+                  example: odio
+              required:
+                - title
+                - content
+                - author_id
+  '/api/v1/post/{$id}':
+    post:
+      summary: "Exibir um post\n\nEste endpoint retorna os detalhes de um post específico."
+      operationId: exibirUmPostEsteEndpointRetornaOsDetalhesDeUmPostEspecfico
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  title: 'Meu primeiro post'
+                  content: 'Este é o conteúdo do post.'
+                  author_id: 1
+                  created_at: '2023-08-30T19:20:02.000000Z'
+                  updated_at: '2023-08-30T19:20:02.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  title:
+                    type: string
+                    example: 'Meu primeiro post'
+                  content:
+                    type: string
+                    example: 'Este é o conteúdo do post.'
+                  author_id:
+                    type: integer
+                    example: 1
+                  created_at:
+                    type: string
+                    example: '2023-08-30T19:20:02.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2023-08-30T19:20:02.000000Z'
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Post não encontrado.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Post não encontrado.'
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  error: 'Erro no banco de dados.'
+                properties:
+                  error:
+                    type: string
+                    example: 'Erro no banco de dados.'
+      tags:
+        - Posts
+    parameters:
+      -
+        in: path
+        name: $id
+        description: ''
+        example: magni
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: id
+        description: 'O ID do post. Exemplo: 1'
+        example: 19
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Posts
+    description: ''
