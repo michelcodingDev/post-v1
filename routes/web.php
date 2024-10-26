@@ -19,11 +19,6 @@ Route::get('/', function () {
 
 
 
-Route::resource('posts', PostsController::class);
-
-Route::post('post/create', [PostsController::class, 'create']);
-
-
 Route::get('/login', function () {
     abort(response()->json(['message' => 'Token de autenticação inválido ou não fornecido.'], 401));
 })->name('login');
