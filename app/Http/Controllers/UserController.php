@@ -57,6 +57,11 @@ class UserController extends Controller
             ]);
 
             $user = User::create($validatedData);
+            return response()->json([
+                'message' => 'Post criado com sucesso.',
+                'data' => $user
+            ], 201);
+
             return response()->json($user, 201);
         } catch (ValidationException $e) {
             return response()->json([
