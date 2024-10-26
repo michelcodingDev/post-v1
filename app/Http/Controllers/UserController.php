@@ -47,38 +47,6 @@ class UserController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        try {
-            $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:8',
-            ]);
-
-            $user = User::create($validatedData);
-            return response()->json([
-                'message' => 'Post criado com sucesso.',
-                'data' => $user
-            ], 201);
-
-            return response()->json($user, 201);
-        } catch (ValidationException $e) {
-            return response()->json([
-                'error' => 'Erro de validação',
-                'messages' => $e->errors()
-            ], 422);
-        } catch (QueryException $e) {
-            return response()->json([
-                'error' => 'Erro no banco de dados: ' . $e->getMessage()
-            ], 500);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Erro: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
     public function show($id)
     {
         try {
@@ -106,7 +74,10 @@ class UserController extends Controller
 
             $user = User::findOrFail($id);
             $user->update($validatedData);
-            return response()->json($user);
+            return response()->json([
+                'message' => 'Usuário atualizado com sucesso.',
+                'data' => $user
+            ], 201);
         } catch (ValidationException $e) {
             return response()->json([
                 'error' => 'Erro de validação',
@@ -151,7 +122,12 @@ class UserController extends Controller
             ]);
 
             $user = User::create($validatedData);
-            return response()->json($user, 201);
+
+             return response()->json([
+                'message' => 'Usuário criado com sucesso.',
+                'data' => $user
+            ], 201);
+
         } catch (ValidationException $e) {
             return response()->json([
                 'error' => 'Erro de validação',

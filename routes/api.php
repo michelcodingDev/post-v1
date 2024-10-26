@@ -34,5 +34,5 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::resource('users', UserController::class);
 });
 
-
+Route::post("users/login",[UserController::class,'login']);
 Route::post('users/create', [UserController::class, 'create']);
