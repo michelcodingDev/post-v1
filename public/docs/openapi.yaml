@@ -7,6 +7,64 @@ servers:
   -
     url: 'http://localhost'
 paths:
+  /api/v1/users/login:
+    post:
+      summary: 'Realiza o login do utilizador.'
+      operationId: realizaOLoginDoUtilizador
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  token: eyJ0eXAiOiJKV1...
+                  user:
+                    id: 1
+                    name: 'John Doe'
+                    email: johndoe@example.com
+                properties:
+                  token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1...
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: johndoe@example.com
+      tags:
+        - Autenticação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'O email do utilizador.'
+                  example: johndoe@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'A senha do utilizador.'
+                  example: password123
+                  nullable: false
+              required:
+                - email
+                - password
+      security: []
   /api/v1/posts:
     get:
       summary: "Listar todos os posts\n\nEste endpoint retorna uma lista de todos os posts não deletados."
@@ -53,11 +111,11 @@ paths:
               schema:
                 type: object
                 example:
-                  error: 'Nenhuma post foi encontrada.'
+                  error: 'Nenhum post foi encontrada.'
                 properties:
                   error:
                     type: string
-                    example: 'Nenhuma post foi encontrada.'
+                    example: 'Nenhum post foi encontrada.'
       tags:
         - Posts
   /api/v1/posts/create:
@@ -163,19 +221,23 @@ paths:
                 title:
                   type: string
                   description: 'O título do post. Exemplo: Meu novo post'
-                  example: praesentium
+                  example: quaerat
+                  nullable: false
                 content:
                   type: string
                   description: 'O conteúdo do post.'
-                  example: sint
+                  example: rerum
+                  nullable: false
                 author_id:
                   type: integer
                   description: 'O ID do autor. Exemplo: 1'
                   example: 17
+                  nullable: false
                 image:
                   type: string
                   description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
-                  example: fugit
+                  example: deserunt
+                  nullable: false
               required:
                 - title
                 - content
@@ -359,19 +421,18 @@ paths:
                 title:
                   type: string
                   description: 'O novo título do post. Exemplo: Título atualizado'
-                  example: debitis
+                  example: iure
+                  nullable: false
                 content:
                   type: string
                   description: 'O novo conteúdo do post.'
-                  example: molestias
+                  example: quas
+                  nullable: false
                 author_id:
                   type: integer
                   description: 'O ID atualizado do autor.'
-                  example: 17
-                image:
-                  type: string
-                  description: 'O novo link da imagem.'
-                  example: sit
+                  example: 11
+                  nullable: false
     delete:
       summary: "Excluir um post\n\nEste endpoint marca um post como excluído."
       operationId: excluirUmPostEsteEndpointMarcaUmPostComoExcludo
@@ -421,7 +482,7 @@ paths:
         in: path
         name: id
         description: 'O ID do post. Exemplo: 1'
-        example: 11
+        example: 16
         required: true
         schema:
           type: integer
@@ -528,19 +589,23 @@ paths:
                 title:
                   type: string
                   description: 'O título do post. Exemplo: Meu novo post'
-                  example: non
+                  example: hic
+                  nullable: false
                 content:
                   type: string
                   description: 'O conteúdo do post.'
-                  example: et
+                  example: nulla
+                  nullable: false
                 author_id:
                   type: integer
                   description: 'O ID do autor. Exemplo: 1'
-                  example: 7
+                  example: 19
+                  nullable: false
                 image:
                   type: string
                   description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
-                  example: odio
+                  example: non
+                  nullable: false
               required:
                 - title
                 - content
@@ -615,7 +680,7 @@ paths:
         in: path
         name: $id
         description: ''
-        example: magni
+        example: et
         required: true
         schema:
           type: string
@@ -623,11 +688,290 @@ paths:
         in: path
         name: id
         description: 'O ID do post. Exemplo: 1'
-        example: 19
+        example: 16
+        required: true
+        schema:
+          type: integer
+  /api/v1/users:
+    get:
+      summary: 'Lista todos os utilizadores.'
+      operationId: listaTodosOsUtilizadores
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    name: 'John Doe'
+                    email: johndoe@example.com
+      tags:
+        - Utilizadores
+      security: []
+  /api/v1/users/create:
+    get:
+      summary: 'Cria um novo utilizador.'
+      operationId: criaUmNovoUtilizador
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Usuário criado com sucesso.'
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    email: johndoe@example.com
+                properties:
+                  message:
+                    type: string
+                    example: 'Usuário criado com sucesso.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: johndoe@example.com
+      tags:
+        - Utilizadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'O nome do utilizador.'
+                  example: 'John Doe'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'O email do utilizador.'
+                  example: johndoe@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'A senha do utilizador.'
+                  example: password123
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+      security: []
+    post:
+      summary: 'Cria um novo utilizador.'
+      operationId: criaUmNovoUtilizador
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Usuário criado com sucesso.'
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    email: johndoe@example.com
+                properties:
+                  message:
+                    type: string
+                    example: 'Usuário criado com sucesso.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: johndoe@example.com
+      tags:
+        - Utilizadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'O nome do utilizador.'
+                  example: 'John Doe'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'O email do utilizador.'
+                  example: johndoe@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'A senha do utilizador.'
+                  example: password123
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+      security: []
+  '/api/v1/users/{id}':
+    get:
+      summary: 'Exibe um utilizador específico.'
+      operationId: exibeUmUtilizadorEspecfico
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 1
+                  name: 'John Doe'
+                  email: johndoe@example.com
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: 'John Doe'
+                  email:
+                    type: string
+                    example: johndoe@example.com
+      tags:
+        - Utilizadores
+      security: []
+    put:
+      summary: 'Atualiza um utilizador.'
+      operationId: atualizaUmUtilizador
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Usuário atualizado com sucesso.'
+                  data:
+                    id: 1
+                    name: 'John Doe'
+                    email: johndoe@example.com
+                properties:
+                  message:
+                    type: string
+                    example: 'Usuário atualizado com sucesso.'
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: 'John Doe'
+                      email:
+                        type: string
+                        example: johndoe@example.com
+      tags:
+        - Utilizadores
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'O nome do utilizador.'
+                  example: 'John Doe'
+                  nullable: false
+                email:
+                  type: string
+                  description: 'O email do utilizador.'
+                  example: johndoe@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: 'A nova senha do utilizador.'
+                  example: password123
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+      security: []
+    delete:
+      summary: 'Exclui um utilizador.'
+      operationId: excluiUmUtilizador
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Usuário deletado com sucesso'
+                properties:
+                  message:
+                    type: string
+                    example: 'Usuário deletado com sucesso'
+      tags:
+        - Utilizadores
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'O ID do utilizador.'
+        example: 1
         required: true
         schema:
           type: integer
 tags:
   -
+    name: Autenticação
+    description: ''
+  -
     name: Posts
+    description: ''
+  -
+    name: Utilizadores
     description: ''

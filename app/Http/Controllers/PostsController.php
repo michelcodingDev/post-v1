@@ -83,8 +83,7 @@ class PostsController extends Controller
             $validatedData = $request->validate([
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
-                'author_id' => 'required|integer|exists:users,id',
-                'image' => 'string'
+                'author_id' => 'required|integer|exists:users,id'
             ]);
 
             $post = Post::create($validatedData);
@@ -162,7 +161,6 @@ class PostsController extends Controller
      * @bodyParam title string O novo título do post. Exemplo: Título atualizado
      * @bodyParam content string O novo conteúdo do post.
      * @bodyParam author_id integer O ID atualizado do autor.
-     * @bodyParam image string O novo link da imagem.
      *
      * @response 200 {
      *   "message": "Post atualizado com sucesso.",
@@ -203,8 +201,7 @@ class PostsController extends Controller
             $validatedData = $request->validate([
                 'title' => 'sometimes|required|string|max:255',
                 'content' => 'sometimes|required|string',
-                'author_id' => 'sometimes|required|integer|exists:users,id',
-                'image' => 'string'
+                'author_id' => 'sometimes|required|integer|exists:users,id'               
             ]);
 
             $post->update($validatedData);

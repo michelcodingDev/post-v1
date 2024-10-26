@@ -47,7 +47,7 @@ endpoints:
         status: 404
         content: |-
           {
-            "error": "Nenhuma post foi encontrada."
+            "error": "Nenhum post foi encontrada."
           }
         headers: []
         description: ''
@@ -87,19 +87,21 @@ endpoints:
         name: title
         description: 'O título do post. Exemplo: Meu novo post'
         required: true
-        example: praesentium
+        example: quaerat
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       content:
         name: content
         description: 'O conteúdo do post.'
         required: true
-        example: sint
+        example: rerum
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       author_id:
         name: author_id
@@ -109,21 +111,23 @@ endpoints:
         type: integer
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       image:
         name: image
         description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
         required: false
-        example: fugit
+        example: deserunt
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanBodyParameters:
-      title: praesentium
-      content: sint
+      title: quaerat
+      content: rerum
       author_id: 17
-      image: fugit
+      image: deserunt
     fileParameters: []
     responses:
       -
@@ -196,13 +200,14 @@ endpoints:
         name: id
         description: 'O ID do post. Exemplo: 1'
         required: true
-        example: 11
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanUrlParameters:
-      id: 11
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -273,13 +278,14 @@ endpoints:
         name: id
         description: 'O ID do post. Exemplo: 1'
         required: true
-        example: 14
+        example: 15
         type: integer
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanUrlParameters:
-      id: 14
+      id: 15
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -287,43 +293,36 @@ endpoints:
         name: title
         description: 'O novo título do post. Exemplo: Título atualizado'
         required: false
-        example: debitis
+        example: iure
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       content:
         name: content
         description: 'O novo conteúdo do post.'
         required: false
-        example: molestias
+        example: quas
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       author_id:
         name: author_id
         description: 'O ID atualizado do autor.'
         required: false
-        example: 17
+        example: 11
         type: integer
         enumValues: []
         exampleWasSpecified: false
-        custom: []
-      image:
-        name: image
-        description: 'O novo link da imagem.'
-        required: false
-        example: sit
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanBodyParameters:
-      title: debitis
-      content: molestias
-      author_id: 17
-      image: sit
+      title: iure
+      content: quas
+      author_id: 11
     fileParameters: []
     responses:
       -
@@ -405,13 +404,14 @@ endpoints:
         name: id
         description: 'O ID do post. Exemplo: 1'
         required: true
-        example: 9
+        example: 17
         type: integer
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanUrlParameters:
-      id: 9
+      id: 17
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -480,43 +480,47 @@ endpoints:
         name: title
         description: 'O título do post. Exemplo: Meu novo post'
         required: true
-        example: non
+        example: hic
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       content:
         name: content
         description: 'O conteúdo do post.'
         required: true
-        example: et
+        example: nulla
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       author_id:
         name: author_id
         description: 'O ID do autor. Exemplo: 1'
         required: true
-        example: 7
+        example: 19
         type: integer
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       image:
         name: image
         description: 'O link da imagem. Exemplo: http://exemplo.com/imagem.png'
         required: false
-        example: odio
+        example: non
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanBodyParameters:
-      title: non
-      content: et
-      author_id: 7
-      image: odio
+      title: hic
+      content: nulla
+      author_id: 19
+      image: non
     fileParameters: []
     responses:
       -
@@ -589,23 +593,25 @@ endpoints:
         name: $id
         description: ''
         required: true
-        example: magni
+        example: et
         type: string
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
       id:
         name: id
         description: 'O ID do post. Exemplo: 1'
         required: true
-        example: 19
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
+        nullable: false
         custom: []
     cleanUrlParameters:
-      $id: magni
-      id: 19
+      $id: et
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []

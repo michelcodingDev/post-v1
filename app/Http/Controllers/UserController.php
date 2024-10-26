@@ -6,33 +6,53 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
-
-    public function  auth(Request $request)
+    /**
+     * Autentica o utilizador e gera um token de autenticação.
+     *
+     * @group Autenticação
+     * @bodyParam email string required O email do utilizador. Example: johndoe@example.com
+     * @bodyParam password string required A senha do utilizador. Example: password123
+     * @response 201 {
+     *   "user": { "id": 1, "name": "John Doe", "email": "johndoe@example.com" },
+     *   "token": "eyJ0eXAiOiJKV1..."
+     * }
+     */
+    public function auth(Request $request)
     {
         $user = User::where('email', $request->email)->first();
-        // print_r($data);
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response([
-                    'message' => ['These credentials do not match our records.']
-                ], 404);
-            }
         
-             $token = $user->createToken('my-app-token')->plainTextToken;
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => ['Estas credenciais não correspondem aos nossos registos.']
+            ], 404);
+        }
         
-            $response = [
-                'user' => $user,
-                'token' => $token
-            ];
+        $token = $user->createToken('my-app-token')->plainTextToken;
         
-             return response($response, 201);
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
         
+        return response($response, 201);
     }
     
+    /**
+     * Lista todos os utilizadores.
+     *
+     * @group Utilizadores
+     * @response 200 [{
+     *   "id": 1,
+     *   "name": "John Doe",
+     *   "email": "johndoe@example.com"
+     * }]
+     */
     public function index()
     {
-        
         try {
             $users = User::all();
             return response()->json($users);
@@ -47,6 +67,17 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Exibe um utilizador específico.
+     *
+     * @group Utilizadores
+     * @urlParam id integer required O ID do utilizador. Example: 1
+     * @response 200 {
+     *   "id": 1,
+     *   "name": "John Doe",
+     *   "email": "johndoe@example.com"
+     * }
+     */
     public function show($id)
     {
         try {
@@ -63,6 +94,23 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Atualiza um utilizador.
+     *
+     * @group Utilizadores
+     * @urlParam id integer required O ID do utilizador. Example: 1
+     * @bodyParam name string required O nome do utilizador. Example: John Doe
+     * @bodyParam email string required O email do utilizador. Example: johndoe@example.com
+     * @bodyParam password string required A nova senha do utilizador. Example: password123
+     * @response 201 {
+     *   "message": "Usuário atualizado com sucesso.",
+     *   "data": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "email": "johndoe@example.com"
+     *   }
+     * }
+     */
     public function update(Request $request, $id)
     {
         try {
@@ -94,6 +142,15 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Exclui um utilizador.
+     *
+     * @group Utilizadores
+     * @urlParam id integer required O ID do utilizador. Example: 1
+     * @response 200 {
+     *   "message": "Usuário deletado com sucesso"
+     * }
+     */
     public function destroy($id)
     {
         try {
@@ -111,7 +168,22 @@ class UserController extends Controller
         }
     }
 
-    
+    /**
+     * Cria um novo utilizador.
+     *
+     * @group Utilizadores
+     * @bodyParam name string required O nome do utilizador. Example: John Doe
+     * @bodyParam email string required O email do utilizador. Example: johndoe@example.com
+     * @bodyParam password string required A senha do utilizador. Example: password123
+     * @response 201 {
+     *   "message": "Usuário criado com sucesso.",
+     *   "data": {
+     *     "id": 1,
+     *     "name": "John Doe",
+     *     "email": "johndoe@example.com"
+     *   }
+     * }
+     */
     public function create(Request $request)
     {
         try {
@@ -123,7 +195,7 @@ class UserController extends Controller
 
             $user = User::create($validatedData);
 
-             return response()->json([
+            return response()->json([
                 'message' => 'Usuário criado com sucesso.',
                 'data' => $user
             ], 201);
@@ -144,6 +216,17 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Realiza o login do utilizador.
+     *
+     * @group Autenticação
+     * @bodyParam email string required O email do utilizador. Example: johndoe@example.com
+     * @bodyParam password string required A senha do utilizador. Example: password123
+     * @response 200 {
+     *   "token": "eyJ0eXAiOiJKV1...",
+     *   "user": { "id": 1, "name": "John Doe", "email": "johndoe@example.com" }
+     * }
+     */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -152,10 +235,9 @@ class UserController extends Controller
             $user = Auth::user();
             $token = $user->createToken('api-token')->plainTextToken;
 
-            return response()->json(['token' => $token,'user' => $user,], 200);
+            return response()->json(['token' => $token, 'user' => $user], 200);
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
     }
-
 }
