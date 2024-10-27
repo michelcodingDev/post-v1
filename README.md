@@ -28,7 +28,7 @@ Antes de começar, você precisará ter os seguintes softwares instalados na sua
    cd seu_repositorio
 Instalar dependências do Composer:
 
-bash
+  ```bash
 Copiar código
 composer install
 Configurar o arquivo .env:
@@ -55,67 +55,6 @@ Copiar código
 php artisan migrate
 Configurar o Scribe para documentar a API:
 
-Instale o Scribe como dependência de desenvolvimento e publique o arquivo de configuração.
-
-bash
-Copiar código
-composer require --dev knuckleswtf/scribe
-php artisan scribe:install
-Gerar a documentação da API:
-
-Execute o comando abaixo para gerar a documentação e disponibilizá-la em public/docs.
-
-bash
-Copiar código
-php artisan scribe:generate
-Endpoints da API
-1. Autenticação
-Login do Utilizador
-
-#  POST /api/login
-Parâmetros:
-email (string) - Email do utilizador
-password (string) - Senha do utilizador
-Resposta de sucesso: 200 OK com o token de autenticação.
-Logout do Utilizador
-
-# POST /api/logout
-Cabeçalho: Authorization: Bearer {token}
-Resposta de sucesso: 200 OK.
-2. Endpoints de Utilizadores
-Listar Todos os Utilizadores
-
-# GET /api/users
-Cabeçalho: Authorization: Bearer {token}
-Resposta de sucesso: 200 OK com uma lista de utilizadores.
-Ver Perfil do Utilizador Autenticado
-
-# GET /api/user
-Cabeçalho: Authorization: Bearer {token}
-Resposta de sucesso: 200 OK com os detalhes do utilizador.
-Atualizar Perfil do Utilizador Autenticado
-
-# PUT /api/user
-Parâmetros:
-name (string) - Nome do utilizador
-email (string) - Email do utilizador
-password (string) - Nova senha do utilizador
-Cabeçalho: Authorization: Bearer {token}
-Resposta de sucesso: 201 Created.
-Excluir Conta do Utilizador Autenticado
-
-# DELETE /api/user
-Cabeçalho: Authorization: Bearer {token}
-Resposta de sucesso: 200 OK.
-3. Criar Novo Utilizador
-Criar Utilizador
-
-# POST /api/register
-Parâmetros:
-name (string) - Nome do utilizador
-email (string) - Email do utilizador (deve ser único)
-password (string) - Senha do utilizador (mínimo 8 caracteres)
-Resposta de sucesso: 201 Created.
 Acesso à Documentação
 A documentação da API está disponível em http://localhost:8000/docs após a geração com o Scribe.
 
