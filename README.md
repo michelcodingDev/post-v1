@@ -1,24 +1,31 @@
-rojeto API Laravel para Gestão de Utilizadores
+
+Copiar código
+# Projeto API Laravel para Gestão de Utilizadores
+
 Este projeto fornece uma API RESTful construída com Laravel para gerir utilizadores. Inclui endpoints para autenticação, criação, atualização e exclusão de utilizadores.
 
-Funcionalidades
-Autenticação de utilizadores com geração de tokens.
-CRUD de utilizadores (criação, leitura, atualização e exclusão).
-Documentação automática da API com o Scribe.
-Pré-requisitos
+## Funcionalidades
+
+- Autenticação de utilizadores com geração de tokens.
+- CRUD de utilizadores (criação, leitura, atualização e exclusão).
+- Documentação automática da API com o Scribe.
+
+## Pré-requisitos
+
 Antes de começar, você precisará ter os seguintes softwares instalados na sua máquina:
 
-PHP >= 8.0
-Composer
-MySQL ou outro sistema de base de dados suportado pelo Laravel
-Laravel 9.x
-Configuração do Ambiente
-Clonar o repositório:
+- [PHP >= 8.0](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [MySQL](https://www.mysql.com/) ou outro sistema de base de dados suportado pelo Laravel
+- [Laravel 9.x](https://laravel.com/)
 
-bash
-Copiar código
-git clone https://github.com/seu_usuario/seu_repositorio.git
-cd seu_repositorio
+## Configuração do Ambiente
+
+1. **Clonar o repositório:**
+
+   ```bash
+   git clone https://github.com/seu_usuario/seu_repositorio.git
+   cd seu_repositorio
 Instalar dependências do Composer:
 
 bash
@@ -65,30 +72,30 @@ Endpoints da API
 1. Autenticação
 Login do Utilizador
 
-POST /api/login
+#  POST /api/login
 Parâmetros:
 email (string) - Email do utilizador
 password (string) - Senha do utilizador
 Resposta de sucesso: 200 OK com o token de autenticação.
 Logout do Utilizador
 
-POST /api/logout
+# POST /api/logout
 Cabeçalho: Authorization: Bearer {token}
 Resposta de sucesso: 200 OK.
 2. Endpoints de Utilizadores
 Listar Todos os Utilizadores
 
-GET /api/users
+# GET /api/users
 Cabeçalho: Authorization: Bearer {token}
 Resposta de sucesso: 200 OK com uma lista de utilizadores.
 Ver Perfil do Utilizador Autenticado
 
-GET /api/user
+# GET /api/user
 Cabeçalho: Authorization: Bearer {token}
 Resposta de sucesso: 200 OK com os detalhes do utilizador.
 Atualizar Perfil do Utilizador Autenticado
 
-PUT /api/user
+# PUT /api/user
 Parâmetros:
 name (string) - Nome do utilizador
 email (string) - Email do utilizador
@@ -97,13 +104,13 @@ Cabeçalho: Authorization: Bearer {token}
 Resposta de sucesso: 201 Created.
 Excluir Conta do Utilizador Autenticado
 
-DELETE /api/user
+# DELETE /api/user
 Cabeçalho: Authorization: Bearer {token}
 Resposta de sucesso: 200 OK.
 3. Criar Novo Utilizador
 Criar Utilizador
 
-POST /api/register
+# POST /api/register
 Parâmetros:
 name (string) - Nome do utilizador
 email (string) - Email do utilizador (deve ser único)
