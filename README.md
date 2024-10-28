@@ -55,7 +55,7 @@ A documentação da API está disponível em http://localhost:8000/docs após a 
 Executar a Aplicação
 Inicie o servidor de desenvolvimento do Laravel:
 
-bash
-Copiar código
+ ```bash
 php artisan serve
+ ```
 A aplicação estará disponível em http://localhost:8000.
