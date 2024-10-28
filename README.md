@@ -23,39 +23,33 @@ Antes de começar, você precisará ter os seguintes softwares instalados na sua
 
 1. **Clonar o repositório:**
 
-   ```bash
+ ```bash
    git clone https://github.com/seu_usuario/seu_repositorio.git
    cd seu_repositorio
-Instalar dependências do Composer:
+  ```
+## Instalar dependências do Composer:
 
   ```bash
-Copiar código
-composer install
-Configurar o arquivo .env:
 
-Renomeie o arquivo .env.example para .env e configure as seguintes variáveis com as suas credenciais de base de dados:
+composer update
 
-env
-Copiar código
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=nome_do_banco_de_dados
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-Gerar a chave da aplicação:
+  ```
+ ```bash
 
-bash
-Copiar código
 php artisan key:generate
-Executar as migrações para criar as tabelas no banco de dados:
+ ```
 
-bash
-Copiar código
+##  Executar as migrações para criar as tabelas no banco de dados:
+
+ ```bash
+
 php artisan migrate
-Configurar o Scribe para documentar a API:
 
-Acesso à Documentação
+  ```
+
+
+
+## Acesso à Documentação
 A documentação da API está disponível em http://localhost:8000/docs após a geração com o Scribe.
 
 Executar a Aplicação
