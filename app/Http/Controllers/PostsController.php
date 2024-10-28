@@ -76,8 +76,6 @@ class PostsController extends Controller
      */
     public function create(Request $request)
     {
-
-     //  dd($request);
         
         try {
             $validatedData = $request->validate([
