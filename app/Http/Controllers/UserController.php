@@ -8,6 +8,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
     /**
@@ -184,7 +185,7 @@ class UserController extends Controller
      *   }
      * }
      */
-    public function create(Request $request)
+    public function create(request $request)
     {
         try {
             $validatedData = $request->validate([

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Database\QueryException;
-use App\Http\Requests\PostsRequest;
 
 class PostsController extends Controller
 {
@@ -75,11 +74,15 @@ class PostsController extends Controller
      * @authenticated
      * @header Authorization Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5
      */
-    public function create(PostsRequest $request)
+    public function create(Request $request)
     {
         
         try {
-            $validatedData = $request->validated();
+            $validatedData = $request->validate([
+                'title' => 'required|string|max:255',
+                'content' => 'required|string',
+                'author_id' => 'required|integer|exists:users,id'
+            ]);
 
             $post = Post::create($validatedData);
 
