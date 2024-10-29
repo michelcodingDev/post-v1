@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Database\QueryException;
+use App\Http\Requests\PostsRequest;
 
 class PostsController extends Controller
 {
@@ -28,10 +29,10 @@ class PostsController extends Controller
      * @authenticated
      * @header Authorization Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5
      */
-    public function index()
+    public function index(Post $posts)
     {
         try {
-            $posts = Post::where('deleted', false)->get();
+            $posts = $posts->where('deleted', false)->get();
             return response()->json($posts);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Nenhum post foi encontrado.'], 404);
@@ -74,15 +75,11 @@ class PostsController extends Controller
      * @authenticated
      * @header Authorization Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5
      */
-    public function create(Request $request)
+    public function create(PostsRequest $request)
     {
         
         try {
-            $validatedData = $request->validate([
-                'title' => 'required|string|max:255',
-                'content' => 'required|string',
-                'author_id' => 'required|integer|exists:users,id'
-            ]);
+            $validatedData = $request->validated();
 
             $post = Post::create($validatedData);
 
@@ -179,7 +176,7 @@ class PostsController extends Controller
      *   "messages": {
      *     "title": ["O campo título é obrigatório."],
      *     "content": ["O campo conteúdo é obrigatório."]
-     *   }
+     *   } 
      * }
      * @response 500 {
      *   "error": "Erro no banco de dados."

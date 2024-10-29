@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class PostsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,15 +26,6 @@ class PostRequest extends FormRequest
             'content' => 'required|string',
             'author_id' => 'required|integer|exists:users,id',
             'image' => 'string'
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'title.required' => 'O campo título é obrigatório.',
-            'content.required' => 'O campo conteúdo é obrigatório.',
-            'author_id' => 'O campo author é obrigatório.',
         ];
     }
 }
