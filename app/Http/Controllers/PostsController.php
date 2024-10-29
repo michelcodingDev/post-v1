@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Database\QueryException;
-
+use App\Http\Requests\PostsRequest;
 class PostsController extends Controller
 {
     /**
@@ -74,15 +74,11 @@ class PostsController extends Controller
      * @authenticated
      * @header Authorization Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5
      */
-    public function create(Request $request)
+    public function create(PostsRequest $request)
     {
         
         try {
-            $validatedData = $request->validate([
-                'title' => 'required|string|max:255',
-                'content' => 'required|string',
-                'author_id' => 'required|integer|exists:users,id'
-            ]);
+            $validatedData = $request->validated();
 
             $post = Post::create($validatedData);
 
@@ -187,27 +183,20 @@ class PostsController extends Controller
      * @authenticated
      * @header Authorization Bearer 1|LinnYgzxQm7zEQjdKg84GClWcTHfSrd0pGN9LLdWac9515e5
      */
-    public function update(Request $request, $id)
+    public function update(PostsRequest $request , $id)
     {
         try {
             $post = Post::findOrFail($id);
 
-            if ($post->deleted) {
-                return response()->json(['error' => 'Post não encontrado.'], 404);
-            }
 
-            $validatedData = $request->validate([
-                'title' => 'sometimes|required|string|max:255',
-                'content' => 'sometimes|required|string',
-                'author_id' => 'sometimes|required|integer|exists:users,id'               
-            ]);
+            $validatedData = $request->validated();
 
             $post->update($validatedData);
 
             return response()->json([
                 'message' => 'Post atualizado com sucesso.',
                 'data' => $post
-            ]);
+            ],status: 204);
 
         } catch (QueryException $e) {
             return response()->json(['error' => 'Erro no banco de dados: ' . $e->getMessage()], 500);
@@ -248,7 +237,7 @@ class PostsController extends Controller
 
             $post->update(['deleted' => 1]);
 
-            return response()->json(['message' => 'Post excluído com sucesso.']);
+            return response()->json(['message' => 'Post excluído com sucesso.'],244);
 
         } catch (\Exception $e) {
             return response()->json(['error' => 'Erro: ' . $e->getMessage()], 500);
